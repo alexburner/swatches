@@ -5,13 +5,13 @@
 const MIN_COLOR_COUNT = 3;
 
 const SEED_COLORS = [
-  "#ba8baf",
-  "#dc9656",
-  "#f7ca88",
-  "#a1b56c",
+  "#7cafc2",
   "#86c1b9",
-  "#7cafc2"
-].reverse();
+  "#a1b56c",
+  "#f7ca88",
+  "#dc9656",
+  "#ba8baf"
+];
 
 // Scaler for mapping min-max to 0-1
 const getNumberScale = (min, max) =>
