@@ -4,14 +4,10 @@
 
 const MIN_COLOR_COUNT = 4;
 
-const SEED_COLORS = [
-  "#7cafc2",
-  "#86c1b9",
-  "#a1b56c",
-  "#f7ca88",
-  "#dc9656",
-  "#ba8baf"
-];
+const SEED_COLORS = {
+  gruvbox: ["#7cafc2", "#86c1b9", "#a1b56c", "#f7ca88", "#dc9656", "#ba8baf"],
+  spotlight: ["#52CBB0", "#33B5E1", "#A363D5", "#D73C9A"]
+};
 
 // Scaling fn for mapping 0-1 to a color sequence
 const getColorScale = colors => {
@@ -47,7 +43,7 @@ const createSwatch = colors => {
 
 // Draw a sequence of swatches
 const drawSwatches = count => {
-  const colorScale = getColorScale(SEED_COLORS);
+  const colorScale = getColorScale(SEED_COLORS.spotlight);
   for (let swatchIndex = 0; swatchIndex < count; swatchIndex++) {
     const colorCount = swatchIndex + 1;
     console.log("");
