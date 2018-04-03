@@ -1,5 +1,5 @@
 # swatches
-Playing w/ d3 colors
+Experimenting w/ d3 colors
 
 #### used
 
