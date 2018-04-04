@@ -1,13 +1,32 @@
 # swatches
-Experimenting w/ d3 colors
+Experimenting with d3 colors
 
-#### used
+## install
+Install npm dependencies
+```cmd
+npm install
+```
 
-- d3 v5 https://github.com/d3/d3
-- d3 scale - continuous - interpolate https://github.com/d3/d3-scale#sequential-scales
-- d3 interpolate - color spaces https://github.com/d3/d3-interpolate#color-spaces
+## watch (dev)
+Run webpack dev server with watch
+```cmd
+npm run watch
+```
 
-#### other
+## build (prod)
+Clean out built folder & run webpack build with production optimizations
+```cmd
+npm run build
+```
 
-- d3 scale chromatic https://github.com/d3/d3-scale-chromatic
-- d3 color https://github.com/d3/d3-color
+## style
+Auto-format code with `prettier` and `tslint --fix`
+```cmd
+npm run style
+```
+
+## clean
+Remove npm dependencies and build caches
+```cmd
+npm run clean
+```

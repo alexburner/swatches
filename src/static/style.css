@@ -1,13 +1,11 @@
-html {
+html, body, #root, .app {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-
-  background-color: #32302f;
 }
 
-body {
+.grid {
   --padding: 50px;
   --padding-x: var(--padding);
   --padding-y: var(--padding);
