@@ -23,6 +23,17 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #EEE;
 }
 
+.references a {
+  display: block;
+  padding: 0 2px 2px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.references a:hover {
+  text-decoration: underline;
+}
+
 .simple-button {
   padding: 0px 9px;
   cursor: pointer;

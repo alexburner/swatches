@@ -100,6 +100,22 @@ export default class Controls extends React.Component<Props, State> {
             />
           </>
         )}
+
+        <h5>External links</h5>
+        <div className="references">
+          <a
+            href="https://github.com/d3/d3-scale#continuous-scales"
+            target="_blank"
+          >
+            d3-scale
+          </a>
+          <a
+            href="https://github.com/d3/d3-interpolate#color-spaces"
+            target="_blank"
+          >
+            d3-interpolate
+          </a>
+        </div>
       </div>
     )
   }
