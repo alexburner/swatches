@@ -1,4 +1,4 @@
-import { interpolateHcl } from 'd3-interpolate'
+import * as d3interpolat from 'd3-interpolate'
 import { scaleLinear, ScaleLinear } from 'd3-scale'
 import { times } from 'lodash'
 
@@ -12,7 +12,7 @@ export const getColorScale = (
   return scaleLinear<number, string>()
     .domain(domain)
     .range(colors as any[])
-    .interpolate(interpolateHcl as any)
+    .interpolate(d3interpolat.interpolateHcl as any)
 }
 
 // Scaling fn for mapping indices 0-n to 0-1

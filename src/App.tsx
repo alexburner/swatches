@@ -1,7 +1,9 @@
 import * as React from 'react'
+
+import Controls from 'src/Controls'
 import Grid from 'src/Grid'
 
-interface State {
+export interface State {
   backgroundColor: string
   paletteColors: string[]
   paletteCountMin: number
@@ -13,15 +15,8 @@ export default class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      backgroundColor: '#333',
-      paletteColors: [
-        '#7cafc2',
-        '#86c1b9',
-        '#a1b56c',
-        '#f7ca88',
-        '#dc9656',
-        '#ba8baf',
-      ],
+      backgroundColor: '#333333',
+      paletteColors: ['#7cafc2', '#a1b56c', '#f7ca88', '#dc9656', '#ba8baf'],
       paletteCountMin: 5,
     }
   }
@@ -32,6 +27,7 @@ export default class App extends React.Component<Props, State> {
         className="app"
         style={{ backgroundColor: this.state.backgroundColor }}
       >
+        <Controls appState={this.state} onChange={this.onControlsChange} />
         <Grid
           paletteColors={this.state.paletteColors}
           paletteCountMin={this.state.paletteCountMin}
@@ -39,4 +35,6 @@ export default class App extends React.Component<Props, State> {
       </div>
     )
   }
+
+  private onControlsChange = (newState: State) => this.setState(newState)
 }

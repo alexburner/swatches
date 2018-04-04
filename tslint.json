@@ -10,6 +10,7 @@
     "curly": false,
     "eofline": true,
     "interface-name": false,
+    "jsx-no-lambda": false,
     "max-classes-per-file": false,
     "no-console": [true, {"allow": ["warn", "error"]}],
     "no-empty": false,
