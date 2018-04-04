@@ -1,7 +1,9 @@
+import * as d3interpolate from 'd3-interpolate'
 import * as React from 'react'
 import { ChromePicker, ColorChangeHandler, ColorResult } from 'react-color'
 
 import { State as AppState } from 'src/App'
+import { Interpolators } from 'src/scales'
 
 interface State {
   showPopover: {
@@ -34,6 +36,7 @@ export default class Controls extends React.Component<Props, State> {
               backgroundColor: result.hex,
             }),
         )}
+
         <h5>Palette Seed Colors</h5>
         {this.props.appState.paletteColors.map((color, i) =>
           this.getPicker(i, color, (result: ColorResult) =>
@@ -48,8 +51,55 @@ export default class Controls extends React.Component<Props, State> {
         <div className="simple-button" onClick={this.addPaletteColor}>
           {'\u002B'}
         </div>
-        <h5>Palette Interpolator</h5>
+
         <h5>Min Palette Size</h5>
+        <input
+          type="number"
+          value={Number(this.props.appState.paletteCountMin)}
+          onChange={e =>
+            this.props.onChange({
+              ...this.props.appState,
+              paletteCountMin: Number(e.target.value),
+            })
+          }
+        />
+
+        <h5>Palette Interpolator</h5>
+        <select
+          value={this.props.appState.paletteInterpolator}
+          onChange={e =>
+            this.props.onChange({
+              ...this.props.appState,
+              paletteInterpolator: e.target.value as Interpolators,
+            })
+          }
+        >
+          {Object.keys(Interpolators).map(interpolatorKey => (
+            <option
+              key={interpolatorKey}
+              value={Interpolators[interpolatorKey as any]}
+            >
+              {interpolatorKey}
+            </option>
+          ))}
+        </select>
+
+        {typeof d3interpolate[this.props.appState.paletteInterpolator] ===
+          'function' && (
+          <>
+            <h5>Interpolator Gamma</h5>
+            <input
+              type="number"
+              value={Number(this.props.appState.paletteInterpolatorGamma)}
+              onChange={e =>
+                this.props.onChange({
+                  ...this.props.appState,
+                  paletteInterpolatorGamma: Number(e.target.value),
+                })
+              }
+            />
+          </>
+        )}
       </div>
     )
   }
