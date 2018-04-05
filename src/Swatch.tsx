@@ -20,8 +20,8 @@ export default ({
   const colors = times(colorCount, i => colorScale(indexScale(i)))
   return (
     <div className="swatch">
-      {colors.map(color => (
-        <div key={color} className="color" style={{ backgroundColor: color }} />
+      {colors.map((color, i) => (
+        <div key={i} className="color" style={{ backgroundColor: color }} />
       ))}
     </div>
   )
