@@ -21,7 +21,6 @@ export const getColorScale = (
   const domain = times(colors.length, i => i / lastIndex)
   const interpolator: any = d3interpolate[interpolatorName]
   if (typeof interpolator.gamma === 'function') {
-    console.log(interpolatorGamma)
     interpolator.gamma(interpolatorGamma)
   }
   return scaleLinear<number, string>()
