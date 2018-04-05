@@ -37,7 +37,7 @@ export default class Controls extends React.Component<Props, State> {
             }),
         )}
 
-        <h5>Palette Seed Colors</h5>
+        <h5>Seed Colors</h5>
         {this.props.appState.paletteColors.map((color, i) =>
           this.getPicker(i, color, (result: ColorResult) =>
             this.props.onChange({
@@ -52,7 +52,7 @@ export default class Controls extends React.Component<Props, State> {
           {'\u002B'}
         </div>
 
-        <h5>Min Palette Size</h5>
+        <h5>Minimum Colors</h5>
         <input
           type="number"
           value={Number(this.props.appState.paletteCountMin)}
@@ -64,7 +64,7 @@ export default class Controls extends React.Component<Props, State> {
           }
         />
 
-        <h5>Palette Interpolator</h5>
+        <h5>Color Space</h5>
         <select
           value={this.props.appState.paletteInterpolator}
           onChange={e =>
@@ -84,7 +84,7 @@ export default class Controls extends React.Component<Props, State> {
           ))}
         </select>
 
-        <h5>External links</h5>
+        <h5>More info</h5>
         <div className="references">
           <a
             href="https://github.com/d3/d3-scale#continuous-scales"
