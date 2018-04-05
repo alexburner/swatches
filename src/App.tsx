@@ -17,26 +17,25 @@ interface Props {}
 export default class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    const urlParams = qs.parse(document.location.hash.slice(1))
-    this.state =
-      urlParams && urlParams.state
-        ? urlParams.state
-        : {
-            backgroundColor: '#333333',
-            paletteColors: [
-              '#7cafc2',
-              '#a1b56c',
-              '#f7ca88',
-              '#dc9656',
-              '#ba8baf',
-            ],
-            paletteCountMin: 5,
-            paletteInterpolator: Interpolators.Cubehelix,
-          }
+    const urlState = qs.parse(document.location.hash.slice(2))
+    this.state = Object.keys(urlState).length
+      ? urlState
+      : {
+          backgroundColor: '#333333',
+          paletteColors: [
+            '#7cafc2',
+            '#a1b56c',
+            '#f7ca88',
+            '#dc9656',
+            '#ba8baf',
+          ],
+          paletteCountMin: 5,
+          paletteInterpolator: Interpolators.Cubehelix,
+        }
   }
 
   public render() {
-    document.location.hash = qs.stringify({ state: this.state })
+    document.location.hash = '/' + qs.stringify(this.state)
     return (
       <div
         className="app"
