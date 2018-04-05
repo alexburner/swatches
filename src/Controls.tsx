@@ -48,7 +48,7 @@ export default class Controls extends React.Component<Props, State> {
             }),
           ),
         )}
-        <div className="simple-button" onClick={this.addPaletteColor}>
+        <div className="add-button" onClick={this.addPaletteColor}>
           {'\u002B'}
         </div>
 
@@ -149,7 +149,7 @@ export default class Controls extends React.Component<Props, State> {
           {typeof name === 'number' &&
             this.props.appState.paletteColors.length > 2 && (
               <div
-                className="simple-button"
+                className="remove-button"
                 onClick={() => this.removePaletteColor(name)}
               >
                 {'\u00D7'}
