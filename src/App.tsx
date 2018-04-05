@@ -14,11 +14,22 @@ export interface State {
 
 interface Props {}
 
+const isState = (val: any): val is State =>
+  val &&
+  val.backgroundColor &&
+  val.backgroundColor.length &&
+  val.paletteColors &&
+  val.paletteColors.length &&
+  val.paletteCountMin &&
+  !isNaN(Number(val.paletteCountMin)) &&
+  val.paletteInterpolator &&
+  val.paletteInterpolator.length
+
 export default class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     const urlState = qs.parse(document.location.hash.slice(2))
-    this.state = Object.keys(urlState).length
+    this.state = isState(urlState)
       ? urlState
       : {
           backgroundColor: '#333333',
