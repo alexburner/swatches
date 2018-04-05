@@ -54,7 +54,7 @@ export default class Controls extends React.Component<Props, State> {
         <h5>Min Palette Size</h5>
         <input
           type="number"
-          value={Number(this.props.appState.paletteCountMin)}
+          value={Math.max(1, Math.round(this.props.appState.paletteCountMin))}
           onChange={e =>
             this.props.onChange({
               ...this.props.appState,
