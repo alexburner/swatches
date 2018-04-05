@@ -1,5 +1,4 @@
-import { interpolateHcl } from 'd3-interpolate'
-import { scaleLinear, ScaleLinear } from 'd3-scale'
+import { ScaleLinear } from 'd3-scale'
 import { times } from 'lodash'
 import * as React from 'react'
 

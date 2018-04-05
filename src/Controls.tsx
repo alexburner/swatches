@@ -1,6 +1,5 @@
-import * as d3interpolate from 'd3-interpolate'
 import * as React from 'react'
-import { ColorChangeHandler, ColorResult, PhotoshopPicker } from 'react-color'
+import { ColorResult, PhotoshopPicker } from 'react-color'
 
 import { State as AppState } from 'src/App'
 import { Interpolators } from 'src/scales'
@@ -130,6 +129,7 @@ export default class Controls extends React.Component<Props, State> {
         },
       })
     }
+
     const showPopover = () =>
       this.setState({
         popoverColors: {
@@ -137,6 +137,7 @@ export default class Controls extends React.Component<Props, State> {
           [name]: color,
         },
       })
+
     return (
       <div className="picker" key={name}>
         <div className="preview">
@@ -173,14 +174,6 @@ export default class Controls extends React.Component<Props, State> {
       </div>
     )
   }
-
-  private onHidePicker = (): void =>
-    this.setState({
-      popoverColors: {
-        background: undefined,
-        palette: {},
-      },
-    })
 
   private addPaletteColor = (): void => {
     const paletteColors = [...this.props.appState.paletteColors, '#ffffff']
