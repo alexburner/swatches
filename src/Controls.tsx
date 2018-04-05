@@ -159,7 +159,11 @@ export default class Controls extends React.Component<Props, State> {
         {this.state.showPopover[name] && (
           <div className="popover">
             <div className="cover" onClick={hidePopover} />
-            <ChromePicker color={color} onChange={onChange} />
+            <ChromePicker
+              color={color}
+              onChange={onChange}
+              disableAlpha={true}
+            />
           </div>
         )}
       </div>
