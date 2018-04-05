@@ -33,6 +33,7 @@ input {
   padding: 0 2px 2px;
   font-size: 14px;
   text-decoration: none;
+  color: rgb(0, 102, 191);
 }
 
 .references a:hover {
