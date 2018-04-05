@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { ColorResult, PhotoshopPicker } from 'react-color'
 
 import { State as AppState } from 'src/App'
+import Picker from 'src/Picker'
 import { Interpolators } from 'src/scales'
 
 interface State {
@@ -26,27 +26,44 @@ export default class Controls extends React.Component<Props, State> {
     return (
       <div className="controls">
         <h5>Background Color</h5>
-        {this.getPicker(
-          'background',
-          this.props.appState.backgroundColor,
-          (newColor: string) =>
+        <Picker
+          showPopover={Boolean(this.state.popoverColors.background)}
+          originalColor={this.state.popoverColors.background}
+          currentColor={this.props.appState.backgroundColor}
+          onShow={this.getOnShow('background')}
+          onHide={this.getOnHide('background')}
+          onChange={(newColor: string) =>
             this.props.onChange({
               ...this.props.appState,
               backgroundColor: newColor,
-            }),
-        )}
+            })
+          }
+        />
 
         <h5>Seed Colors</h5>
-        {this.props.appState.paletteColors.map((color, i) =>
-          this.getPicker(i, color, (newColor: string) =>
-            this.props.onChange({
-              ...this.props.appState,
-              paletteColors: this.props.appState.paletteColors.map(
-                (oldColor, oldI) => (i === oldI ? newColor : oldColor),
-              ),
-            }),
-          ),
-        )}
+        {this.props.appState.paletteColors.map((color, i) => (
+          <Picker
+            key={i}
+            showPopover={Boolean(this.state.popoverColors[i])}
+            originalColor={this.state.popoverColors[i]}
+            currentColor={this.props.appState.paletteColors[i]}
+            onShow={this.getOnShow(i)}
+            onHide={this.getOnHide(i)}
+            onChange={(newColor: string) =>
+              this.props.onChange({
+                ...this.props.appState,
+                paletteColors: this.props.appState.paletteColors.map(
+                  (oldColor, oldI) => (i === oldI ? newColor : oldColor),
+                ),
+              })
+            }
+            onRemove={
+              this.props.appState.paletteColors.length > 2
+                ? this.getOnRemove(i)
+                : undefined
+            }
+          />
+        ))}
         <div className="add-button" onClick={this.addPaletteColor}>
           {'\u002B'}
         </div>
@@ -116,79 +133,32 @@ export default class Controls extends React.Component<Props, State> {
     }
   }
 
-  private getPicker(
-    name: 'background' | number,
-    color: string,
-    onChange: (newColor: string) => void,
-  ): JSX.Element {
-    const hidePopover = () => {
-      this.setState({
-        popoverColors: {
-          ...this.state.popoverColors,
-          [name]: undefined,
-        },
-      })
-    }
+  private getOnShow = (name: string | number) => (color: string) =>
+    this.setState({
+      popoverColors: {
+        ...this.state.popoverColors,
+        [name]: color,
+      },
+    })
 
-    const showPopover = () =>
-      this.setState({
-        popoverColors: {
-          ...this.state.popoverColors,
-          [name]: color,
-        },
-      })
+  private getOnHide = (name: string | number) => () =>
+    this.setState({
+      popoverColors: {
+        ...this.state.popoverColors,
+        [name]: undefined,
+      },
+    })
 
-    return (
-      <div className="picker" key={name}>
-        <div className="preview">
-          <div
-            className="color"
-            style={{ backgroundColor: color }}
-            onClick={showPopover}
-          />
-          <div className="text">{color}</div>
-          {typeof name === 'number' &&
-            this.props.appState.paletteColors.length > 2 && (
-              <div
-                className="remove-button"
-                onClick={() => this.removePaletteColor(name)}
-              >
-                {'\u00D7'}
-              </div>
-            )}
-        </div>
-        {this.state.popoverColors[name] && (
-          <div className="popover">
-            <div className="cover" onClick={hidePopover} />
-            <PhotoshopPicker
-              color={color}
-              onChange={(result: ColorResult) => onChange(result.hex)}
-              onAccept={hidePopover}
-              onCancel={() => {
-                onChange(this.state.popoverColors[name] as string)
-                hidePopover()
-              }}
-            />
-          </div>
-        )}
-      </div>
-    )
-  }
+  private getOnRemove = (name: number) => () => this.removePaletteColor(name)
 
   private addPaletteColor = (): void => {
     const paletteColors = [...this.props.appState.paletteColors, '#ffffff']
-    this.props.onChange({
-      ...this.props.appState,
-      paletteColors,
-    })
+    this.props.onChange({ ...this.props.appState, paletteColors })
   }
 
   private removePaletteColor = (index: number): void => {
     const paletteColors = [...this.props.appState.paletteColors]
     paletteColors.splice(index, 1)
-    this.props.onChange({
-      ...this.props.appState,
-      paletteColors,
-    })
+    this.props.onChange({ ...this.props.appState, paletteColors })
   }
 }
