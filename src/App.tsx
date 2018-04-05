@@ -46,7 +46,7 @@ export default class App extends React.Component<Props, State> {
   }
 
   public render() {
-    document.location.hash = '/' + qs.stringify(this.state)
+    document.location.replace('#/' + qs.stringify(this.state))
     return (
       <div
         className="app"
