@@ -1,6 +1,6 @@
 import * as d3interpolate from 'd3-interpolate'
 import * as React from 'react'
-import { ChromePicker, ColorChangeHandler, ColorResult } from 'react-color'
+import { ColorChangeHandler, ColorResult, PhotoshopPicker } from 'react-color'
 
 import { State as AppState } from 'src/App'
 import { Interpolators } from 'src/scales'
@@ -159,11 +159,7 @@ export default class Controls extends React.Component<Props, State> {
         {this.state.showPopover[name] && (
           <div className="popover">
             <div className="cover" onClick={hidePopover} />
-            <ChromePicker
-              color={color}
-              onChange={onChange}
-              disableAlpha={true}
-            />
+            <PhotoshopPicker color={color} onChange={onChange} />
           </div>
         )}
       </div>
