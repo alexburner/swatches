@@ -1,3 +1,4 @@
+import qs from 'qs'
 import * as React from 'react'
 
 import Controls from 'src/Controls'
@@ -17,16 +18,27 @@ interface Props {}
 export default class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = {
-      backgroundColor: '#333333',
-      paletteColors: ['#7cafc2', '#a1b56c', '#f7ca88', '#dc9656', '#ba8baf'],
-      paletteCountMin: 5,
-      paletteInterpolator: Interpolators.Cubehelix,
-      paletteInterpolatorGamma: 1,
-    }
+    const urlParams = qs.parse(document.location.hash.slice(1))
+    this.state =
+      urlParams && urlParams.state
+        ? urlParams.state
+        : {
+            backgroundColor: '#333333',
+            paletteColors: [
+              '#7cafc2',
+              '#a1b56c',
+              '#f7ca88',
+              '#dc9656',
+              '#ba8baf',
+            ],
+            paletteCountMin: 5,
+            paletteInterpolator: Interpolators.Cubehelix,
+            paletteInterpolatorGamma: 1,
+          }
   }
 
   public render() {
+    document.location.hash = qs.stringify({ state: this.state })
     return (
       <div
         className="app"
