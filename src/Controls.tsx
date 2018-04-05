@@ -6,9 +6,9 @@ import { State as AppState } from 'src/App'
 import { Interpolators } from 'src/scales'
 
 interface State {
-  showPopover: {
-    background?: boolean
-    [i: number]: boolean
+  popoverColors: {
+    background?: string | undefined
+    [i: number]: string | undefined
   }
 }
 
@@ -20,7 +20,7 @@ interface Props {
 export default class Controls extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
-    this.state = { showPopover: {} }
+    this.state = { popoverColors: {} }
   }
 
   public render(): JSX.Element {
@@ -30,20 +30,20 @@ export default class Controls extends React.Component<Props, State> {
         {this.getPicker(
           'background',
           this.props.appState.backgroundColor,
-          (result: ColorResult) =>
+          (newColor: string) =>
             this.props.onChange({
               ...this.props.appState,
-              backgroundColor: result.hex,
+              backgroundColor: newColor,
             }),
         )}
 
         <h5>Seed Colors</h5>
         {this.props.appState.paletteColors.map((color, i) =>
-          this.getPicker(i, color, (result: ColorResult) =>
+          this.getPicker(i, color, (newColor: string) =>
             this.props.onChange({
               ...this.props.appState,
               paletteColors: this.props.appState.paletteColors.map(
-                (oldColor, oldI) => (i === oldI ? result.hex : oldColor),
+                (oldColor, oldI) => (i === oldI ? newColor : oldColor),
               ),
             }),
           ),
@@ -107,12 +107,11 @@ export default class Controls extends React.Component<Props, State> {
     const prevLength = prevProps.appState.paletteColors.length
     const currLength = this.props.appState.paletteColors.length
     if (currLength > prevLength) {
-      // A color has been added
-      // open popover for it
+      const lastIndex = currLength - 1
       this.setState({
-        showPopover: {
-          ...this.state.showPopover,
-          [currLength - 1]: true,
+        popoverColors: {
+          ...this.state.popoverColors,
+          [lastIndex]: this.props.appState.paletteColors[lastIndex],
         },
       })
     }
@@ -121,20 +120,21 @@ export default class Controls extends React.Component<Props, State> {
   private getPicker(
     name: 'background' | number,
     color: string,
-    onChange: ColorChangeHandler,
+    onChange: (newColor: string) => void,
   ): JSX.Element {
-    const hidePopover = () =>
+    const hidePopover = () => {
       this.setState({
-        showPopover: {
-          ...this.state.showPopover,
-          [name]: false,
+        popoverColors: {
+          ...this.state.popoverColors,
+          [name]: undefined,
         },
       })
+    }
     const showPopover = () =>
       this.setState({
-        showPopover: {
-          ...this.state.showPopover,
-          [name]: true,
+        popoverColors: {
+          ...this.state.popoverColors,
+          [name]: color,
         },
       })
     return (
@@ -156,10 +156,18 @@ export default class Controls extends React.Component<Props, State> {
               </div>
             )}
         </div>
-        {this.state.showPopover[name] && (
+        {this.state.popoverColors[name] && (
           <div className="popover">
             <div className="cover" onClick={hidePopover} />
-            <PhotoshopPicker color={color} onChange={onChange} />
+            <PhotoshopPicker
+              color={color}
+              onChange={(result: ColorResult) => onChange(result.hex)}
+              onAccept={hidePopover}
+              onCancel={() => {
+                onChange(this.state.popoverColors[name] as string)
+                hidePopover()
+              }}
+            />
           </div>
         )}
       </div>
@@ -168,8 +176,8 @@ export default class Controls extends React.Component<Props, State> {
 
   private onHidePicker = (): void =>
     this.setState({
-      showPopover: {
-        background: false,
+      popoverColors: {
+        background: undefined,
         palette: {},
       },
     })
