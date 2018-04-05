@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 12px 0 4px;
 }
 
+input {
+  max-width: 110px;
+}
+
 .app {
   display: grid;
   grid-template-columns: 155px 1fr;
@@ -50,9 +54,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .add-button {
-  --size: 23px;
+  --size: 22px;
   margin-top: 2px;
-  margin-left: 1px;
+  margin-left: 2px;
   margin-bottom: 14px;
   border: 1px dotted #333;
   
