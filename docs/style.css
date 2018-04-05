@@ -9,7 +9,7 @@ html, body, #root, .app {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 12px 0 4px;
+  margin: 18px 0 4px;
 }
 
 input {
@@ -18,13 +18,13 @@ input {
 
 .app {
   display: grid;
-  grid-template-columns: 155px 1fr;
+  grid-template-columns: 160px 1fr;
   grid-template-rows: 1fr;
   grid-auto-flow: column;
 }
 
 .controls {
-  padding: 10px;
+  padding: 4px 14px 16px;
   background-color: #EEE;
 }
 
@@ -45,7 +45,7 @@ input {
   text-align: center;
   cursor: pointer;
   width: var(--size);
-  height: var(--size);
+  height: calc(var(--size) + 1px);
   line-height: var(--size);
 }
 
@@ -58,14 +58,13 @@ input {
   --size: 22px;
   margin-top: 2px;
   margin-left: 2px;
-  margin-bottom: 14px;
-  border: 1px dotted #333;
-  
+  margin-bottom: 20px;
+  border: 1px dotted #AAA;
 }
 
 .remove-button {
   --size: 24px;
-  margin-left: 4px;
+  margin-left: 6px;
   border-radius: 3px;
   color: rgb(180, 52, 52);
 }
@@ -102,6 +101,7 @@ input {
 
 .picker .preview .text {
   margin-left: 8px;
+  font-family: monospace;
   font-size: 14px;
 }
 
