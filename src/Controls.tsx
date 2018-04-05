@@ -84,23 +84,6 @@ export default class Controls extends React.Component<Props, State> {
           ))}
         </select>
 
-        {typeof d3interpolate[this.props.appState.paletteInterpolator] ===
-          'function' && (
-          <>
-            <h5>Interpolator Gamma</h5>
-            <input
-              type="number"
-              value={Number(this.props.appState.paletteInterpolatorGamma)}
-              onChange={e =>
-                this.props.onChange({
-                  ...this.props.appState,
-                  paletteInterpolatorGamma: Number(e.target.value),
-                })
-              }
-            />
-          </>
-        )}
-
         <h5>External links</h5>
         <div className="references">
           <a

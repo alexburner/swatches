@@ -10,7 +10,6 @@ export interface State {
   paletteColors: string[]
   paletteCountMin: number
   paletteInterpolator: Interpolators
-  paletteInterpolatorGamma: number
 }
 
 interface Props {}
@@ -33,7 +32,6 @@ export default class App extends React.Component<Props, State> {
             ],
             paletteCountMin: 5,
             paletteInterpolator: Interpolators.Cubehelix,
-            paletteInterpolatorGamma: 1,
           }
   }
 
@@ -49,7 +47,6 @@ export default class App extends React.Component<Props, State> {
           paletteColors={this.state.paletteColors}
           paletteCountMin={this.state.paletteCountMin}
           paletteInterpolator={this.state.paletteInterpolator}
-          paletteInterpolatorGamma={this.state.paletteInterpolatorGamma}
         />
       </div>
     )

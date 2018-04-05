@@ -14,15 +14,11 @@ export enum Interpolators {
 export const getColorScale = (
   colors: string[],
   interpolatorName: Interpolators,
-  interpolatorGamma: number,
 ): ScaleLinear<number, string> => {
   if (colors.length < 2) throw new Error('needs more colors')
   const lastIndex = colors.length - 1
   const domain = times(colors.length, i => i / lastIndex)
   const interpolator: any = d3interpolate[interpolatorName]
-  if (typeof interpolator.gamma === 'function') {
-    interpolator.gamma(interpolatorGamma)
-  }
   return scaleLinear<number, string>()
     .domain(domain)
     .range(colors as any[])

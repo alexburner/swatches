@@ -10,7 +10,6 @@ interface Props {
   paletteColors: string[]
   paletteCountMin: number
   paletteInterpolator: Interpolators
-  paletteInterpolatorGamma: number
 }
 
 const SWATCH_COUNT = 20
@@ -19,13 +18,8 @@ export default ({
   paletteColors,
   paletteCountMin,
   paletteInterpolator,
-  paletteInterpolatorGamma,
 }: Props): JSX.Element => {
-  const colorScale = getColorScale(
-    paletteColors,
-    paletteInterpolator,
-    paletteInterpolatorGamma,
-  )
+  const colorScale = getColorScale(paletteColors, paletteInterpolator)
   return (
     <div className="grid">
       {times(SWATCH_COUNT, i => (
