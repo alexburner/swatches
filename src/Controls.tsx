@@ -51,7 +51,7 @@ export default class Controls extends React.Component<Props, State> {
           {'\u002B'}
         </div>
 
-        <h5>Minimum Colors</h5>
+        <h5>Min Palette Size</h5>
         <input
           type="number"
           value={Number(this.props.appState.paletteCountMin)}
