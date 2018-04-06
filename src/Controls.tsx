@@ -67,18 +67,6 @@ export default class Controls extends React.Component<Props, State> {
           {'\u002B'}
         </div>
 
-        <h5>Min Palette Size</h5>
-        <input
-          type="number"
-          value={Math.max(1, Math.round(this.props.appState.paletteCountMin))}
-          onChange={e =>
-            this.props.onChange({
-              ...this.props.appState,
-              paletteCountMin: Number(e.target.value),
-            })
-          }
-        />
-
         <h5>Color Space</h5>
         <select
           value={this.props.appState.paletteInterpolator}
@@ -98,6 +86,18 @@ export default class Controls extends React.Component<Props, State> {
             </option>
           ))}
         </select>
+
+        <h5>Min Palette Size</h5>
+        <input
+          type="number"
+          value={Math.max(1, Math.round(this.props.appState.paletteCountMin))}
+          onChange={e =>
+            this.props.onChange({
+              ...this.props.appState,
+              paletteCountMin: Number(e.target.value),
+            })
+          }
+        />
 
         <h5>More info</h5>
         <div className="references">
