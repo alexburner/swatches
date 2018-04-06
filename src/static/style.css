@@ -69,9 +69,14 @@ input {
   color: rgb(180, 52, 52);
 }
 
+.picker {
+  position: relative;
+}
+
 .picker .popover {
   position: absolute;
   z-index: 2;
+  top: 26px;
 }
 
 .picker .cover {

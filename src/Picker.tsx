@@ -2,7 +2,6 @@ import React from 'react'
 import { ColorResult, PhotoshopPicker } from 'react-color'
 
 interface Props {
-  showPopover: boolean
   originalColor?: string
   currentColor: string
   onChange: (color: string) => void
@@ -33,7 +32,7 @@ export default class Picker extends React.Component<Props, State> {
             </div>
           )}
         </div>
-        {this.props.showPopover && (
+        {this.props.originalColor && (
           <div className="popover" onKeyDown={e => console.log(e)}>
             <div className="cover" onClick={() => this.props.onHide()} />
             <PhotoshopPicker
@@ -64,7 +63,7 @@ export default class Picker extends React.Component<Props, State> {
   }
 
   private onKeydown = (e: KeyboardEvent) => {
-    if (!this.props.showPopover) return
+    if (!this.props.originalColor) return
     switch (e.key) {
       case 'Enter':
         e.preventDefault()

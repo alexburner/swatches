@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { last } from 'lodash'
 import { State as AppState } from 'src/App'
 import Picker from 'src/Picker'
 import { Interpolators } from 'src/scales'
@@ -27,7 +28,6 @@ export default class Controls extends React.Component<Props, State> {
       <div className="controls">
         <h5>Background Color</h5>
         <Picker
-          showPopover={Boolean(this.state.popoverColors.background)}
           originalColor={this.state.popoverColors.background}
           currentColor={this.props.appState.backgroundColor}
           onShow={this.getOnShow('background')}
@@ -44,7 +44,6 @@ export default class Controls extends React.Component<Props, State> {
         {this.props.appState.paletteColors.map((color, i) => (
           <Picker
             key={i}
-            showPopover={Boolean(this.state.popoverColors[i])}
             originalColor={this.state.popoverColors[i]}
             currentColor={this.props.appState.paletteColors[i]}
             onShow={this.getOnShow(i)}
@@ -103,7 +102,7 @@ export default class Controls extends React.Component<Props, State> {
         <h5>More info</h5>
         <div className="references">
           <a
-            href="https://github.com/d3/d3-scale#continuous-scales"
+            href="https://github.com/d3/d3-scale#continuous_interpolate"
             target="_blank"
           >
             d3-scale
@@ -152,7 +151,8 @@ export default class Controls extends React.Component<Props, State> {
   private getOnRemove = (name: number) => () => this.removePaletteColor(name)
 
   private addPaletteColor = (): void => {
-    const paletteColors = [...this.props.appState.paletteColors, '#ffffff']
+    const lastColor = last(this.props.appState.paletteColors) || '#000000'
+    const paletteColors = [...this.props.appState.paletteColors, lastColor]
     this.props.onChange({ ...this.props.appState, paletteColors })
   }
 

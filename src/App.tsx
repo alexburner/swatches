@@ -33,15 +33,9 @@ export default class App extends React.Component<Props, State> {
       ? urlState
       : {
           backgroundColor: '#333333',
-          paletteColors: [
-            '#7cafc2',
-            '#a1b56c',
-            '#f7ca88',
-            '#dc9656',
-            '#ba8baf',
-          ],
-          paletteCountMin: 5,
-          paletteInterpolator: Interpolators.Cubehelix,
+          paletteColors: ['#5b9bb0', '#f8c979', '#bc7cae'],
+          paletteCountMin: 1,
+          paletteInterpolator: Interpolators.Hcl,
         }
   }
 
