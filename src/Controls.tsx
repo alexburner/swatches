@@ -118,20 +118,6 @@ export default class Controls extends React.Component<Props, State> {
     )
   }
 
-  public componentDidUpdate(prevProps: Props): void {
-    const prevLength = prevProps.appState.paletteColors.length
-    const currLength = this.props.appState.paletteColors.length
-    if (currLength > prevLength) {
-      const lastIndex = currLength - 1
-      this.setState({
-        popoverColors: {
-          ...this.state.popoverColors,
-          [lastIndex]: this.props.appState.paletteColors[lastIndex],
-        },
-      })
-    }
-  }
-
   private getOnShow = (name: string | number) => (color: string) =>
     this.setState({
       popoverColors: {
